@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import environ
+from django.utils.timezone import datetime, timedelta
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_DIR = Path(__file__).resolve().parent.parent.parent.joinpath("env", ".env.dev")
@@ -37,12 +39,14 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'user',
+    'graphene_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 ]
 AUTH_USER_MODEL = 'user.User'
 
@@ -54,6 +58,27 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+GRAPHENE = {
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+}
+
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": True,
+    # "JWT_ALLOW_ARGUMENT": True,
+    # "JWT_COOKIE_DOMAIN" : True,
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=15),
+    # "JWT_REFRESH_EXPIRED_HANDLER": lambda orig_iat, context: False,
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
+}
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 ROOT_URLCONF = 'MyDjango.urls'
