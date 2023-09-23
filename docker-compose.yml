@@ -23,6 +23,16 @@ services:
       database:
         condition: service_healthy
 
+  # react-vite2:
+  #   build: 
+  #     context: ./frontend-vite
+  #     dockerfile: ./Dockerfile
+  #   volumes:
+  #     - .:/app
+  #     - dev-react-data:/vol/web
+  #   ports:
+  #     - 3000:3000
+
   database:
     image: postgres:12-alpine
     volumes:
@@ -40,4 +50,5 @@ services:
 volumes:
   dev-db-data:
   dev-app-data:
+  dev-react-data:
     
