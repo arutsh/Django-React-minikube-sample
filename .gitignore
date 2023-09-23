@@ -105,3 +105,10 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 
+
+# NODE
+frontend/node_modules
+.DS_Store
+frontend/dist
+frontend/dist-ssr
+*.local
