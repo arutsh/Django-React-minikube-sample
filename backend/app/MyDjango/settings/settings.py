@@ -39,6 +39,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'user',
+    'tree.apps.TreeConfig',
     'graphene_django',
     'django.contrib.admin',
     'django.contrib.auth',

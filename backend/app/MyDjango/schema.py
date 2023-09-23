@@ -2,9 +2,11 @@ import graphene
 import graphql_jwt
 from graphene_django import  DjangoObjectType
 from user.schema import schema as user_schema
+from tree.schema import schema as tree_schema
 
 
 class Query(user_schema.Query,
+            tree_schema.Query,
             graphene.ObjectType):
     pass
 
