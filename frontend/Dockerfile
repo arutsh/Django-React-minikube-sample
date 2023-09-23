@@ -1,0 +1,12 @@
+FROM node:20 
+WORKDIR /app/frontend
+
+COPY package.json package-lock.json  /app/frontend/
+RUN npm install 
+RUN npm install react-scripts@3.4.1 -g 
+COPY . .
+
+EXPOSE 5173
+# trying to add to git
+CMD ["npm", "run", "dev"]
+
