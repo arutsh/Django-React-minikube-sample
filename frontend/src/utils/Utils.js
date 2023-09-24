@@ -27,3 +27,13 @@ export const formatValue = (value) => Intl.NumberFormat('en-US', {
   maximumSignificantDigits: 3,
   notation: 'compact',
 }).format(value);
+
+
+/**
+ * 
+ * @param {Date} value 
+ * @returns 
+ */
+export function formatDate(value) {
+  return new Date(value).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+}
